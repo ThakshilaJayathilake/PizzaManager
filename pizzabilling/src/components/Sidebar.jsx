@@ -7,9 +7,8 @@ import { Home, FileText } from 'lucide-react';
 
 
 const SIDEBAR_ITEMS = [
-    { name: 'Items', href: '/', icon: Home, color: 'text-yellow-400' },
-    
-    { name: 'Invoice', href: '/invoice', icon: FileText, color: 'text-green-400' },
+    { name: 'Items', href: '/', icon: Home, color: "#F59E0B" }, 
+    { name: 'Invoice', href: '/invoice', icon: FileText, color: "#10B981" }, 
 ];
 
 const Sidebar = () => {
