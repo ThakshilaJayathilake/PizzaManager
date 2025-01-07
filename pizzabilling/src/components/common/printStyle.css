@@ -1,0 +1,38 @@
+/* printStyle.css */
+
+/* General Styles for Print */
+@media print {
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+    color: #000;
+  }
+
+  .invoice-container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    border: 2px solid #000;
+    text-align: center;
+  }
+
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+
+  p {
+    font-size: 1.2rem;
+    margin: 10px 0;
+  }
+
+  strong {
+    font-weight: bold;
+  }
+
+  .invoice-details {
+    margin-top: 30px;
+  }
+}
