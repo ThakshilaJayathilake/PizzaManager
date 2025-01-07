@@ -39,3 +39,14 @@ export const handleDeleteItem = async (id, setItems) => {
         console.error('Error when deleting item', error);
     }
 }
+
+export const handleUpdateItem = async (id, updatedItem, setItems) => {
+    try {
+        // console.log(updatedItem);
+        
+        await ItemModel.updateItem(id, updatedItem);
+        await handleGetItems(setItems);
+    } catch (error) {
+        console.error('Error when updating item', error);
+    }
+}

@@ -28,8 +28,28 @@ const deleteItem = async (id) => {
     return responseBody;
 }
 
+const updateItem = async (id, updatedItem) => {
+    console.log(updatedItem);
+
+    const response = await fetch(`${API_URL}/${id}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(updatedItem),
+    });
+    if (!response.ok) {
+        throw new Error('Failed to update item');
+    }
+    const responseBody = await response.json();
+    
+    return responseBody;
+}
+
+
 export default {
     getItems,
     addItem,
     deleteItem,
+    updateItem,
 };

@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import { handleDeleteItem } from '../../controllers/ItemController';
+import { handleDeleteItem, handleUpdateItem } from '../../controllers/ItemController';
 
 const StatCard = ({id, name, category, price, setItems}) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -16,6 +16,19 @@ const StatCard = ({id, name, category, price, setItems}) => {
         
         handleDeleteItem(id, setItems);
         setConfirmDelModalOpen(false);
+    };
+
+    const updateItem = (id) => {
+        const updatedItem = {
+            ...newItem,
+            id,
+            name: newItem.name || name,
+            category: newItem.category || category,
+            price: newItem.price || price
+        };
+        // console.log(updatedItem);
+
+        handleUpdateItem(id, updatedItem, setItems);
     };
 
     return (
@@ -70,7 +83,7 @@ const StatCard = ({id, name, category, price, setItems}) => {
                          />
                      </div>
 
-                     <h5 className="tracking-tight mt-4 mb-3 text-slate-900">Add New Item</h5>
+                     <h5 className="tracking-tight mt-4 mb-3 text-slate-900"></h5>
 
 
                      {/* Content */}
@@ -82,7 +95,6 @@ const StatCard = ({id, name, category, price, setItems}) => {
                              value={newItem.name}
                              className="text-xl text-black w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                              onChange={handleInputChange}
-                             ref={(input) => input && input.focus()}
                          />
                          {/* selector for catagories */}
                          <label className="block text-xl text-gray-400 mb-2">Select item category</label>
@@ -118,9 +130,9 @@ const StatCard = ({id, name, category, price, setItems}) => {
                          <button
                          className="flex text-xl items-center justify-center rounded-md bg-slate-900 px-5 py-2.5 text-white hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-blue-300"
                          onClick={() => {
-                             alert('Item saved!');
+                             alert('Item updated!');
                              setIsModalOpen(false);
-                             addItem();
+                             updateItem(id);
                          }}
                          >
                          Save
