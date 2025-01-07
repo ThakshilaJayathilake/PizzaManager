@@ -4,6 +4,7 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
 )
 
@@ -22,7 +23,15 @@ func initializeRouter() {
 	r.HandleFunc("/invoices/{id}", GetInvoice).Methods("GET")
 	r.HandleFunc("/invoices", CreateInvoice).Methods("POST")
 
-	log.Fatal(http.ListenAndServe(":9001", r))
+	// CORS handler to wrap the router
+	corsHandler := handlers.CORS(
+		// allow req from frontend origin
+		handlers.AllowedOrigins([]string{"http://localhost:5173"}),
+		handlers.AllowedMethods([]string{"GET", "POST", "PUT", "DELETE"}),
+		handlers.AllowedHeaders([]string{"Content-Type"}),
+	)(r)
+
+	log.Fatal(http.ListenAndServe(":9001", corsHandler))
 }
 
 func main() {
