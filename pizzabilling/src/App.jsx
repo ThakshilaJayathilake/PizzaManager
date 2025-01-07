@@ -4,6 +4,7 @@ import { Routes, Route } from 'react-router-dom';
 import ItemManagement from './pages/ItemManagement';
 import InvoiceManagement from './pages/InvoiceManagement';
 import Sidebar from './components/Sidebar';
+// import AddItem from './pages/AddItem';
 
 function App() {
 
@@ -19,6 +20,7 @@ function App() {
       <Routes>
         <Route path='/' element={<ItemManagement />}></Route>
         <Route path='/invoice' element={<InvoiceManagement />}></Route>
+        {/* <Route path='/create' element={<AddItem />}></Route> */}
       </Routes>
     </div>
   )
