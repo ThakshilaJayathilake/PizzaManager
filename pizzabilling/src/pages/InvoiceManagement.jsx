@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import Header from '../components/common/Header';
+import ListTable from '../components/common/ListTable';
 
 const InvoiceManagement = () => {
     const [invoices, setInvoices] = useState([]);
@@ -15,34 +17,14 @@ const InvoiceManagement = () => {
     };
 
     return (
-        <div>
-            <h1>Invoice Management</h1>
-            <div>
-                <input
-                    type="text"
-                    name="customer"
-                    placeholder="Customer Name"
-                    value={newInvoice.customer}
-                    onChange={handleInputChange}
-                />
-                <input
-                    type="number"
-                    name="amount"
-                    placeholder="Amount"
-                    value={newInvoice.amount}
-                    onChange={handleInputChange}
-                />
-                <button onClick={addInvoice}>Add Invoice</button>
-            </div>
-            <h2>Invoices</h2>
-            <ul>
-                {invoices.map((invoice, index) => (
-                    <li key={index}>
-                        {invoice.customer} - ${invoice.amount}
-                    </li>
-                ))}
-            </ul>
+        <div className='flex-1 overflow-auto relative z-10 w-full'>
+            <Header title="Invoices"/>
+
+            <main className='max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8'>
+                <ListTable />
+            </main>
         </div>
+       
     );
 };
 
