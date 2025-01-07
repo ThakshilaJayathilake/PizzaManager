@@ -1,7 +1,7 @@
 # Pizza Manager 
 ## - Billing & Item Management System
 
-This project is a Billing & Item Management system for a Pizza Shop. It allows the shop to manage items (e.g., pizzas, toppings, beverages) and create invoices for customers. The system includes CRUD operations for both items and invoices.
+This project is a Billing & Item Management system for a Pizza Shop. It allows the shop to manage items (e.g., pizzas, toppings, beverages) and create invoices for customers. The system includes CRUD operations for both items and invoices, along with a React frontend for a dynamic user experience..
 
 ## Features
 - Add, update, and delete items in the menu (Pizza, Toppings, Beverages).
@@ -9,11 +9,14 @@ This project is a Billing & Item Management system for a Pizza Shop. It allows t
 - Automatically calculate item totals and taxes for each invoice.
 - Store and retrieve invoice details with associated items.
 - Built with Go (Golang) and GORM for MySQL database management.
+- Frontend built with React, MUI, Tailwind CSS for interactive UI and smooth user experience.
 
 ## Requirements
 - Go 1.23+ (for building and running the backend)
 - MySQL (or Docker for MySQL)
 - Docker (optional for running MySQL in a container)
+- Node.js (for running the frontend)
+- npm (or yarn for managing JavaScript dependencies)
 
 ## Installation and Setup
 
@@ -46,6 +49,24 @@ docker-compose up -d
 ```bash
 go build
 .\backend.exe
+```
+
+### Step 6: Set up the frontend (React)
+1. Navigate to the frontend folder:
+```bash
+cd ../frontend
+```
+2. Install dependencies using npm or yarn:
+```bash
+npm install
+# or
+yarn install
+```
+3. Start the React development server:
+```bash
+npm start
+# or
+yarn start
 ```
 
 
