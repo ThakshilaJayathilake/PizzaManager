@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"log"
 	"net/http"
 
 	"github.com/gorilla/mux"
@@ -31,15 +32,59 @@ func CreateItem(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(item)
 }
 
+// func UpdateItem(w http.ResponseWriter, r *http.Request) {
+// 	w.Header().Set("Content-Type", "application/json")
+// 	params := mux.Vars(r)
+// 	var item Item
+	
+// 	DB.First(&item, params["id"])
+// 	json.NewDecoder(r.Body).Decode(&item)
+// 	DB.Save(&item)
+// 	json.NewEncoder(w).Encode(item)
+// }
+
 func UpdateItem(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/json")
-	params := mux.Vars(r)
-	var item Item
-	DB.First(&item, params["id"])
-	json.NewDecoder(r.Body).Decode(&item)
-	DB.Save(&item)
-	json.NewEncoder(w).Encode(item)
+    w.Header().Set("Content-Type", "application/json")
+    params := mux.Vars(r)
+
+    var item Item
+    if err := DB.First(&item, params["id"]).Error; err != nil {
+        w.WriteHeader(http.StatusNotFound)
+        json.NewEncoder(w).Encode(map[string]string{"error": "Item not found"})
+        return
+    }
+
+    var updatedData Item
+    if err := json.NewDecoder(r.Body).Decode(&updatedData); err != nil {
+        w.WriteHeader(http.StatusBadRequest)
+        json.NewEncoder(w).Encode(map[string]string{"error": "Invalid request body"})
+        return
+    }
+
+    // Update only non-zero fields
+    if updatedData.Name != "" {
+        item.Name = updatedData.Name
+    }
+    if updatedData.Category != "" {
+        item.Category = updatedData.Category
+    }
+    if updatedData.Price != 0 {
+        item.Price = updatedData.Price
+    }
+
+    if err := DB.Save(&item).Error; err != nil {
+        w.WriteHeader(http.StatusInternalServerError)
+        json.NewEncoder(w).Encode(map[string]string{"error": "Failed to update item"})
+        return
+    }
+
+    json.NewEncoder(w).Encode(item)
+
+	log.Printf("Updated Data: %+v\n", updatedData)
+	log.Printf("Item Before Save: %+v\n", item)
+
 }
+
 
 func DeleteItem(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")

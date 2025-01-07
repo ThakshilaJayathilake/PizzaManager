@@ -9,7 +9,7 @@ import (
 var DB *gorm.DB
 var err error
 
-const DNS = "root:MySQLRoot@tcp(localhost:3306)/pizza_shop?charset=utf8mb4&parseTime=True&loc=Local"
+const DNS = "root:MySQLRoot@tcp(localhost:3306)/goapi?charset=utf8mb4&parseTime=True&loc=Local"
 
 func InitialMigration() {
 	DB, err = gorm.Open(mysql.Open(DNS), &gorm.Config{})
